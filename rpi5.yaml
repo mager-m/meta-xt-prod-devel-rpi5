@@ -82,15 +82,15 @@ components:
     build-dir: "%{ZEPHYR_DOM0_DIR}"
     sources:
       - type: west
-        url: "https://github.com/xen-troops/zephyr-dom0-xt.git"
-        rev: "rpi5_dom0_dev"
+        url: "https://github.com/mager-m/zephyr-dom0-xt.git"
+        rev: "feature/aaos_os"
     builder:
       type: zephyr
       board: "%{ZEPHYR_DOM0_MACHINE}"
       target: "%{ZEPHYR_DOM0_TARGET}"
       work_dir: "%{ZEPHYR_DOM0_BUILD_DIR}"
       vars:
-        - 'CONFIG_DOM_STORAGE_FATFS_LOGICAL_DRIVE_NAME="1"'
+        - "CONFIG_DOM_STORAGE_FATFS_LOGICAL_DRIVE_NAME=\"1\""
         - "CONFIG_DOM_CFG_AOSP_TROUT_DOMAIN=y"
         - "CONFIG_DOM_STORAGE_FATFS_ENABLE=y"
         - "CONFIG_DOM_STORAGE_MULTI_PARTITION=y"
