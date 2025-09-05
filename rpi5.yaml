@@ -314,17 +314,17 @@ images:
       dom0:
         gpt_type: ebd0a0a2-b9e5-4433-87c0-68b6b72699c7
         type: vfat
-        size: 512 MiB
+        size: 4 GiB
         items:
           "dom0/z_sync.bin": "%{ZEPHYR_DOMU1_DIR}/%{ZEPHYR_DOMU1_BUILD_DIR}/zephyr/zephyr.bin"
           "dom0/z_blinky.bin": "%{ZEPHYR_DOMU2_DIR}/%{ZEPHYR_DOMU2_BUILD_DIR}/zephyr/zephyr.bin"
           "dom0/helloworld_xen-arm64": "domu_unikraft/helloworld_xen-arm64"
           "dom0/linux-pv-image": "%{YOCTOS_WORK_DIR}/%{DOMU_BUILD_DIR}/tmp/deploy/images/%{DOMU_MACHINE}/Image-initramfs-%{DOMU_MACHINE}.bin"
-          "dom0/trout/boot.img": "domu_aosp_trout/boot.img"
-          "dom0/trout/init_boot.img": "domu_aosp_trout/init_boot.img"
-          "dom0/trout/vendor_boot.img": "domu_aosp_trout/vendor_boot.img"
-          "dom0/trout/super.img": "domu_aosp_trout/super.img"
-          "dom0/trout/userdata.img": "domu_aosp_trout/userdata.img"
+          "dom0/trout/boot.img": "%{AOSP_IMAGE_DIR}/boot.img"
+          "dom0/trout/init_boot.img": "%{AOSP_IMAGE_DIR}/init_boot.img"
+          "dom0/trout/vendor_boot.img": "%{AOSP_IMAGE_DIR}/vendor_boot.img"
+          "dom0/trout/super.img": "%{AOSP_IMAGE_DIR}/super.img"
+          "dom0/trout/userdata.img": "%{AOSP_IMAGE_DIR}/userdata.img"
 
   rootfs:
     type: gpt
