@@ -13,12 +13,6 @@ variables:
   ZEPHYR_DOM0_TARGET: "zephyr-dom0-xt"
   ZEPHYR_DOM0_BUILD_DIR: "build-dom0"
 
-  ZEPHYR_DOMU1_DIR: "zephyr_sync"
-  ZEPHYR_DOMU1_BUILD_DIR: "build-sync"
-
-  ZEPHYR_DOMU2_DIR: "zephyr_blinky"
-  ZEPHYR_DOMU2_BUILD_DIR: "build-blinky"
-
   DOMD_BUILD_DIR: "build-domd"
   DOMU_BUILD_DIR: "build-domu"
   XT_XEN_DTBO_NAME: "%{SOC_FAMILY}-%{MACHINE}-xen.dtbo"
@@ -99,49 +93,6 @@ components:
       additional_deps:
         - "%{YOCTOS_WORK_DIR}/%{DOMD_BUILD_DIR}/tmp/deploy/images/%{MACHINE}/Image.gz"
         - "%{YOCTOS_WORK_DIR}/%{DOMU_BUILD_DIR}/tmp/deploy/images/%{DOMU_MACHINE}/Image-initramfs-%{DOMU_MACHINE}.bin"
-
-  domu_sync:
-    default: true
-    build-dir: "%{ZEPHYR_DOMU1_DIR}"
-    sources:
-      - type: west
-        url: "https://github.com/xen-troops/zephyr.git"
-        rev: "zephyr-v3.6.0-xt"
-    builder:
-      type: zephyr
-      board: xenvm
-      target: zephyr/samples/synchronization
-      work_dir: "%{ZEPHYR_DOMU1_BUILD_DIR}"
-      target_images:
-        - "%{ZEPHYR_DOMU1_BUILD_DIR}/zephyr/zephyr.bin"
-
-  domu_blinky:
-    default: true
-    build-dir: "%{ZEPHYR_DOMU2_DIR}"
-    sources:
-      - type: west
-        url: "https://github.com/xen-troops/zephyr.git"
-        rev: "zephyr-v3.6.0-xt"
-    builder:
-      type: zephyr
-      board: xenvm
-      target: zephyr/samples/basic/blinky
-      work_dir: "%{ZEPHYR_DOMU2_BUILD_DIR}"
-      snippets:
-        - "rpi_5_xen_domd"
-      target_images:
-        - "%{ZEPHYR_DOMU2_BUILD_DIR}/zephyr/zephyr.bin"
-
-  domu_unikraft:
-    default: true
-    build-dir: domu_unikraft
-    sources:
-      - type: http
-        url: https://github.com/aoscloud/demo-services/raw/main/monkey_zephyr/src/helloworld_xen-arm64
-        file: helloworld_xen-arm64
-        dir: "."
-    builder:
-      type: "null"
 
   domu_aosp_trout:
     default: true
@@ -316,9 +267,6 @@ images:
         type: vfat
         size: 4 GiB
         items:
-          "dom0/z_sync.bin": "%{ZEPHYR_DOMU1_DIR}/%{ZEPHYR_DOMU1_BUILD_DIR}/zephyr/zephyr.bin"
-          "dom0/z_blinky.bin": "%{ZEPHYR_DOMU2_DIR}/%{ZEPHYR_DOMU2_BUILD_DIR}/zephyr/zephyr.bin"
-          "dom0/helloworld_xen-arm64": "domu_unikraft/helloworld_xen-arm64"
           "dom0/linux-pv-image": "%{YOCTOS_WORK_DIR}/%{DOMU_BUILD_DIR}/tmp/deploy/images/%{DOMU_MACHINE}/Image-initramfs-%{DOMU_MACHINE}.bin"
           "dom0/trout/boot.img": "%{AOSP_IMAGE_DIR}/boot.img"
           "dom0/trout/init_boot.img": "%{AOSP_IMAGE_DIR}/init_boot.img"
