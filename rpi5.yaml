@@ -23,7 +23,9 @@ variables:
   XT_DOMU_IMAGE: "core-image-thin-initramfs"
 
   DOMU_MACHINE: "generic-armv8-xt"
-  AOSP_IMAGE_DIR: "/home/az-xen/out/trout"
+  
+  //TODO: change before use
+  AAOS_IMAGE_DIR: "path/to/aaos/images"
 
   DOMD_CAN_TYPE: ""
 
@@ -87,7 +89,7 @@ components:
       work_dir: "%{ZEPHYR_DOM0_BUILD_DIR}"
       vars:
         - "CONFIG_DOM_STORAGE_FATFS_LOGICAL_DRIVE_NAME=\"1\""
-        - "CONFIG_DOM_CFG_AOSP_TROUT_DOMAIN=y"
+        - "CONFIG_DOM_CFG_AAOS_DOMAIN=y"
         - "CONFIG_DOM_STORAGE_FATFS_ENABLE=y"
         - "CONFIG_DOM_STORAGE_MULTI_PARTITION=y"
       target_images:
@@ -96,9 +98,9 @@ components:
         - "%{YOCTOS_WORK_DIR}/%{DOMD_BUILD_DIR}/tmp/deploy/images/%{MACHINE}/Image.gz"
         - "%{YOCTOS_WORK_DIR}/%{DOMU_BUILD_DIR}/tmp/deploy/images/%{DOMU_MACHINE}/Image-initramfs-%{DOMU_MACHINE}.bin"
 
-  domu_aosp_trout:
+  domu_aaos:
     default: true
-    build-dir: "%{AOSP_IMAGE_DIR}"
+    build-dir: "%{AAOS_IMAGE_DIR}"
     builder:
       type: "null"
 
@@ -268,11 +270,11 @@ images:
         size: 4 GiB
         items:
           "dom0/linux-pv-image": "%{YOCTOS_WORK_DIR}/%{DOMU_BUILD_DIR}/tmp/deploy/images/%{DOMU_MACHINE}/Image-initramfs-%{DOMU_MACHINE}.bin"
-          "dom0/trout/boot.img": "%{AOSP_IMAGE_DIR}/boot.img"
-          "dom0/trout/init_boot.img": "%{AOSP_IMAGE_DIR}/init_boot.img"
-          "dom0/trout/vendor_boot.img": "%{AOSP_IMAGE_DIR}/vendor_boot.img"
-          "dom0/trout/super.img": "%{AOSP_IMAGE_DIR}/super.img"
-          "dom0/trout/userdata.img": "%{AOSP_IMAGE_DIR}/userdata.img"
+          "dom0/aaos/boot.img": "%{AAOS_IMAGE_DIR}/boot.img"
+          "dom0/aaos/init_boot.img": "%{AAOS_IMAGE_DIR}/init_boot.img"
+          "dom0/aaos/vendor_boot.img": "%{AAOS_IMAGE_DIR}/vendor_boot.img"
+          "dom0/aaos/super.img": "%{AAOS_IMAGE_DIR}/super.img"
+          "dom0/aaos/userdata.img": "%{AAOS_IMAGE_DIR}/userdata.img"
 
   rootfs:
     type: gpt
