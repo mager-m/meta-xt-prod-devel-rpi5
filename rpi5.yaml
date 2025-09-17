@@ -24,8 +24,8 @@ variables:
 
   DOMU_MACHINE: "generic-armv8-xt"
   
-  //TODO: change before use
-  AAOS_IMAGE_DIR: "path/to/aaos/images"
+  # TODO: change before use
+  AAOS_IMAGE_DIR: "../aaos-12-out"
 
   DOMD_CAN_TYPE: ""
 
@@ -275,6 +275,8 @@ images:
           "dom0/aaos/vendor_boot.img": "%{AAOS_IMAGE_DIR}/vendor_boot.img"
           "dom0/aaos/super.img": "%{AAOS_IMAGE_DIR}/super.img"
           "dom0/aaos/userdata.img": "%{AAOS_IMAGE_DIR}/userdata.img"
+          "dom0/aaos/Image": "%{AAOS_IMAGE_DIR}/Image"
+          "dom0/aaos/aaos-guest-gicv2.dtb": "zephyr/zephyr-dom0-xt/prebuilt/aaos-guest-gicv2.dtb"
 
   rootfs:
     type: gpt
