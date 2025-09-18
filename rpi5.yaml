@@ -269,7 +269,6 @@ images:
         type: vfat
         size: 4 GiB
         items:
-          "dom0/linux-pv-image": "%{YOCTOS_WORK_DIR}/%{DOMU_BUILD_DIR}/tmp/deploy/images/%{DOMU_MACHINE}/Image-initramfs-%{DOMU_MACHINE}.bin"
           "dom0/aaos/boot.img": "%{AAOS_IMAGE_DIR}/boot.img"
           "dom0/aaos/init_boot.img": "%{AAOS_IMAGE_DIR}/init_boot.img"
           "dom0/aaos/vendor_boot.img": "%{AAOS_IMAGE_DIR}/vendor_boot.img"
